@@ -1,0 +1,3002 @@
+<html><head><style type="text/css">.turbo-progress-bar {
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: #0076ff;
+  z-index: 9999;
+  transition:
+    width 300ms ease-out,
+    opacity 150ms 150ms ease-in;
+  transform: translate3d(0, 0, 0);
+}
+</style><style id="st_globalStyles">
+/* SCROLLBAR */
+
+[dark-scroll]::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+[dark-scroll]::-webkit-scrollbar-track-piece {
+  background-color: #2b2b2b;
+  border: 1px solid #1d1d1d;
+}
+
+[dark-scroll]::-webkit-scrollbar-thumb {
+  height: 10px;
+  background-color: #4d4d4d;
+}
+[dark-scroll]::-webkit-scrollbar-thumb:hover {
+  background-color: #5a5a5a;
+}
+
+/* LOAD PROGRESS */
+
+.turbolinks-progress-bar {
+  height: 3px;
+  background-color: #ff6250;
+}
+
+/* GROUPING */
+
+[data-id].ui-selecting {
+  box-shadow: inset 0 0 0 1px #4285f4 !important;
+}
+[data-id].ui-selected {
+  box-shadow: inset 0 0 0 1px #4285f4 !important;
+}
+
+/* CURSOR */
+
+body[mode='comments'] * {
+  cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00LjkxNjQ4IDIzLjQxMDlDNS40OTE1MyAyMi45ODg3IDUuOTMxNzkgMjIuMzkzNSA2LjIzMjggMjEuNjQwN0M0Ljc5MDY5IDE5LjczODMgNCAxNy4zOTMzIDQgMTQuOTk3NUM0IDguOTM0MSA4LjkzMjgyIDQgMTUuMDAyMiA0QzIxLjA3MTcgNCAyNiA4LjkzOTE5IDI2IDE1LjAwMjVDMjYgMjEuMDY1OSAyMS4wNjcyIDI2IDE0Ljk5NzggMjZDMTIuOTg5NiAyNiAxMS4wMzUzIDI1LjQ1NTcgOS4zMjM2NyAyNC40MjMxQzguNDI5NjUgMjQuOTU3MiA3LjQxNDM0IDI1LjIyNjggNi4zMDAxOCAyNS4yMjY4QzUuOTU0MjYgMjUuMjI2OCA1LjU5OTM1IDI1LjIwMTQgNS4yNTM0MiAyNS4xNDU0QzQuOTAzIDI1LjA4OTUgNC42Mjg5NiAyNC44MDQ2IDQuNTUyNTggMjQuNDE4QzQuNDc2MjEgMjQuMDI2NCA0LjYxOTk3IDIzLjYyOTYgNC45MTY0OCAyMy40MTA5WiIgZmlsbD0iI0ZGNjI1MCIvPgo8L3N2Zz4K')
+      0 24,
+    auto !important;
+}
+
+body[mode='code'] [data-id]:not(.hidden) {
+  cursor: default;
+}
+
+/* default node state */
+
+body[mode='code'] [data-id]:not(.hidden), body[mode='comments'] [data-id]:not(.hidden) {
+  pointer-events: all;
+}
+
+/* is_image */
+
+body[mode='code'] [data-id].is_image [data-id], body[mode='comments'] [data-id].is_image [data-id] {
+  pointer-events: none !important;
+}
+
+/* without a data-id or ignored */
+
+[data-id].ignore,body[mode='code'] *:not([data-id]) {
+  pointer-events: none !important;
+}
+/* disable transforms for ignored elements */
+
+
+body[mode='code'] [data-id]:hover{
+  transform: none !important;
+}
+
+</style><meta charset="utf-8"><meta name="viewport" content="width=1920, maximum-scale=1.0"><link rel="shortcut icon" type="image/png" href="https://animaproject.s3.amazonaws.com/home/favicon.png"><meta name="og:type" content="website"><meta name="twitter:card" content="photo"><style id="hotspots-styles">
+    .hotspot {
+      position: absolute;
+      border: 1px solid #2a9fd8;
+      background: rgba(0, 173, 255, 0.54);
+      opacity: 0;
+      z-index: -1;
+      pointer-events:none;
+    }
+  </style><style id="hide-styles">
+    .hotspot {
+      display:none !important;
+    }
+  </style><script id="s_turbo" src="https://animaapp.s3.amazonaws.com/static/turbo.es2017-umd.js"></script><script id="anima-overrides-script" src="overrides.js"></script><script src="https://animaapp.s3.amazonaws.com/js/timeline.js"></script><style>
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+@font-face {
+  font-family: "SFUI Display-Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://anima-uploads.s3.amazonaws.com/projects/609ee32d64fa84b611974491/fonts/sf-ui-display-bold.otf') format("opentype");
+}
+
+@font-face {
+  font-family: "SFUI Display-Heavy";
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://anima-uploads.s3.amazonaws.com/projects/60461b230ae57fae03491043/fonts/anyconv-com-sf-ui-display-heavy.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "SFUI Display-Medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url('https://anima-uploads.s3.amazonaws.com/projects/60f4b3fef85b36a0e63035f7/fonts/sfuidisplay-medium.otf') format("opentype");
+}
+
+@font-face {
+  font-family: "SFUI Display-Black";
+  font-style: normal;
+  font-weight: 900;
+  src: url('https://anima-uploads.s3.amazonaws.com/projects/6177f23f26422c9d0487d3de/fonts/sf-ui-display-black.otf') format("opentype");
+}
+
+@font-face {
+  font-family: "SFUI Display-Semibold";
+  font-style: normal;
+  font-weight: 600;
+  src: url('https://anima-uploads.s3.amazonaws.com/projects/603eca4f8d00f51227b4d476/fonts/sf-ui-display-semibold-58646eddcae92.otf') format("opentype");
+}
+/* The following line is used to measure usage of this code in production. For more info see our usage billing page */
+@import url("https://px.animaapp.com/6377771264e76627f7276c88.637777137c22e6ee7e659d85.YU1Ph0r.hch.png");
+
+
+.screen textarea:focus,
+.screen input:focus {
+  outline: none;
+}
+
+.screen * {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+.screen div {
+  -webkit-text-size-adjust: none;
+}
+
+.component-wrapper a {
+  display: contents;
+  pointer-events: auto;
+  text-decoration: none;
+}
+
+.component-wrapper * {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.component-wrapper a *,
+.component-wrapper input,
+.component-wrapper video,
+.component-wrapper iframe {
+  pointer-events: auto;
+}
+
+.component-wrapper.not-ready,
+.component-wrapper.not-ready * {
+  visibility: hidden !important;
+}
+
+.screen a {
+  display: contents;
+  text-decoration: none;
+}
+
+.full-width-a {
+  width: 100%;
+}
+
+.full-height-a {
+  height: 100%;
+}
+
+.container-center-vertical {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  pointer-events: none;
+}
+
+.container-center-vertical > * {
+  flex-shrink: 0;
+  pointer-events: auto;
+}
+
+.container-center-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  pointer-events: none;
+  width: 100%;
+}
+
+.container-center-horizontal > * {
+  flex-shrink: 0;
+  pointer-events: auto;
+}
+
+.auto-animated div {
+  --z-index: -1;
+  opacity: 0;
+  position: absolute;
+}
+
+.auto-animated input {
+  --z-index: -1;
+  opacity: 0;
+  position: absolute;
+}
+
+.auto-animated .container-center-vertical,
+.auto-animated .container-center-horizontal {
+  opacity: 1;
+}
+
+.overlay-base {
+  display: none;
+  height: 100%;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.overlay-base.animate-appear {
+  align-items: center;
+  animation: reveal 0.3s ease-in-out 1 normal forwards;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+}
+
+.overlay-base.animate-disappear {
+  animation: reveal 0.3s ease-in-out 1 reverse forwards;
+  display: block;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.overlay-base.animate-disappear * {
+  pointer-events: none;
+}
+
+@keyframes reveal {
+  from { opacity: 0 }
+ to { opacity: 1 }
+}
+
+.animate-nodelay {
+  animation-delay: 0s;
+}
+
+.align-self-flex-start {
+  align-self: flex-start;
+}
+
+.align-self-flex-end {
+  align-self: flex-end;
+}
+
+.align-self-flex-center {
+  align-self: flex-center;
+}
+
+.valign-text-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.valign-text-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+input:focus {
+  outline: none;
+}
+
+.listeners-active,
+.listeners-active * {
+  pointer-events: auto;
+}
+
+.hidden,
+.hidden * {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.smart-layers-pointers,
+.smart-layers-pointers * {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.listeners-active-click,
+.listeners-active-click * {
+  cursor: pointer;
+}
+
+* {
+  box-sizing: border-box;
+}
+:root { 
+  --eastern-blue: #2194a4;
+  --god-ffffff: #ffffff;
+  --grayed-out-white-ffffff: #ffffff33;
+  --not-really-black-2a2a2a: #2a2a2a;
+ 
+  --font-size-l: 18px;
+  --font-size-m: 14px;
+  --font-size-xl: 22px;
+  --font-size-xxl: 24px;
+  --font-size-xxxl: 25px;
+  --font-size-xxxxl: 30px;
+  --font-size-xxxxxl: 42px;
+ 
+  --font-family-sf_ui_display: "SF UI Display", Helvetica;
+  --font-family-sfui_display-black: "SFUI Display-Black", Helvetica;
+  --font-family-sfui_display-bold: "SFUI Display-Bold", Helvetica;
+  --font-family-sfui_display-heavy: "SFUI Display-Heavy", Helvetica;
+  --font-family-sfui_display-medium: "SFUI Display-Medium", Helvetica;
+  --font-family-sfui_display-semibold: "SFUI Display-Semibold", Helvetica;
+}
+.sfuidisplay-bold-white-18px {
+  color: var(--god-ffffff);
+  font-family: var(--font-family-sfui_display-bold);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.sfuidisplay-medium-shark-14px {
+  color: var(--not-really-black-2a2a2a);
+  font-family: var(--font-family-sfui_display-medium);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+}
+
+:root {
+}
+
+
+/* screen - index */
+
+.index {
+  background-color: var(--god-ffffff);
+  height: 5393px;
+  overflow: hidden;
+  overflow-x: hidden;
+  position: relative;
+  width: 1920px;
+}
+
+.index .background-IO3Fu5 {
+  background-color: transparent;
+  height: 1246px;
+  left: -18px;
+  position: absolute;
+  top: -133px;
+  width: 2215px;
+}
+
+.index .image-1-E7bZMV {
+  background-color: transparent;
+  height: calc(100.00% + 54px);
+  left: -27px;
+  object-fit: cover;
+  position: absolute;
+  top: -27px;
+  width: calc(100.00% + 54px);
+}
+
+.index .image-2-E7bZMV {
+  background-color: #00000030;
+  filter: blur(9px);;
+  height: 100%;
+  left: 1px;
+  position: absolute;
+  top: 1px;
+  width: 100%;
+}
+
+.index .image-1-84XpkF {
+  background: linear-gradient(245.8deg, rgba(11, 191, 252, 0.19) 8.15%, rgba(247, 57, 192, 0.3) 96.95%);
+  background-color: transparent;
+  filter: blur(9px);;
+  height: 100%;
+  left: 1px;
+  position: absolute;
+  top: 1px;
+  width: 100%;
+}
+
+.index .navbar-IO3Fu5 {
+  background-color: transparent;
+  height: 68px;
+  left: 483px;
+  position: absolute;
+  top: -6px;
+  width: 956px;
+}
+
+.index .commencer-jouer-dROX2W {
+  background-color: transparent;
+  bottom: -4px;
+  height: 23px;
+  left: 135px;
+  letter-spacing: 0.00px;
+  line-height: 18px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 196px;
+}
+
+.index .forum-dROX2W {
+  background-color: transparent;
+  bottom: -4px;
+  height: 23px;
+  left: calc(43.76% - 28px);
+  letter-spacing: 0.00px;
+  line-height: 18px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 65px;
+}
+
+.index .discord-dROX2W {
+  background-color: transparent;
+  bottom: -4px;
+  height: 23px;
+  letter-spacing: 0.00px;
+  line-height: 18px;
+  position: absolute;
+  right: calc(41.35% - 33px);
+  text-align: left;
+  white-space: nowrap;
+  width: 81px;
+}
+
+.index .panel-dROX2W {
+  background-color: transparent;
+  bottom: -4px;
+  height: 23px;
+  letter-spacing: 0.00px;
+  line-height: 18px;
+  position: absolute;
+  right: calc(27.42% - 16px);
+  text-align: left;
+  white-space: nowrap;
+  width: 57px;
+}
+
+.index .hover-dROX2W {
+  background-color: transparent;
+  height: 72px;
+  left: 80px;
+  object-fit: cover;
+  position: absolute;
+  top: -30px;
+  width: 304px;
+}
+
+.index .accueil-dROX2W {
+  background-color: transparent;
+  bottom: -4px;
+  height: 23px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 18px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 77px;
+}
+
+.index .support-technique-dROX2W {
+  background-color: transparent;
+  bottom: -4px;
+  height: 23px;
+  letter-spacing: 0.00px;
+  line-height: 18px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  white-space: nowrap;
+  width: 190px;
+}
+
+.index .register-button-IO3Fu5 {
+  background-color: transparent;
+  height: 51px;
+  left: 857px;
+  position: absolute;
+  top: 700px;
+  width: 206px;
+}
+
+.index .rectangle-2-YF7sV2 {
+  -webkit-backdrop-filter: blur(0px) brightness(110%);
+  backdrop-filter: blur(0px) brightness(110%);
+  background-color: #0bbffc54;
+  border-radius: 100px;
+  box-shadow: 0px 0px 30px #6cf9fbb5;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .rejoindre-YF7sV2 {
+  background-color: transparent;
+  bottom: calc(41.07% - 9px);
+  height: 23px;
+  letter-spacing: 0.00px;
+  line-height: 18px;
+  position: absolute;
+  right: calc(49.06% - 49px);
+  text-align: right;
+  white-space: nowrap;
+  width: 100px;
+}
+
+.index .white-background-2-IO3Fu5 {
+  background-color: var(--god-ffffff);
+  height: 1387px;
+  left: 0px;
+  position: absolute;
+  top: 1083px;
+  width: 1920px;
+}
+
+.index .trac-6-IO3Fu5 {
+  background-color: transparent;
+  height: 536px;
+  left: -66px;
+  object-fit: cover;
+  position: absolute;
+  top: 1002px;
+  width: 2181px;
+}
+
+.index .trac-4-IO3Fu5 {
+  background-color: transparent;
+  height: 562px;
+  left: -94px;
+  object-fit: cover;
+  position: absolute;
+  top: 871px;
+  width: 2144px;
+}
+
+.index .youtube-IO3Fu5 {
+  background-color: transparent;
+  height: 369px;
+  left: 596px;
+  position: absolute;
+  top: 899px;
+  width: 728px;
+}
+
+.index .banner_nologo-6ZKrpO {
+  background-color: transparent;
+  border-radius: 15px;
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .groupe-4-6ZKrpO {
+  background-color: transparent;
+  height: 145px;
+  position: absolute;
+  right: calc(49.89% - 146px);
+  top: calc(50.00% - 72px);
+  width: 293px;
+}
+
+.index .dcouvrir-vice-point-en-2-minutes-L8Cwlz {
+  background-color: transparent;
+  bottom: 0px;
+  height: 28px;
+  left: 0px;
+  position: absolute;
+  width: 100%;
+}
+
+.index .dcouvrir-Xd3z2Q {
+  background-color: transparent;
+  color: var(--god-ffffff);
+  font-family: var(--font-family-sfui_display-heavy);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 400;
+  height: 100%;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  position: absolute;
+  text-align: right;
+  top: 1px;
+  white-space: nowrap;
+  width: 106px;
+}
+
+.index .en-2-minutes-Xd3z2Q {
+  background-color: transparent;
+  color: var(--god-ffffff);
+  font-family: var(--font-family-sfui_display-heavy);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 400;
+  height: 100%;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  position: absolute;
+  right: -2px;
+  text-align: right;
+  top: 1px;
+  white-space: nowrap;
+  width: 137px;
+}
+
+.index .white_xd-Xd3z2Q {
+  background-color: transparent;
+  height: calc(100.00% + 90px);
+  left: calc(42.54% - 48px);
+  object-fit: cover;
+  position: absolute;
+  top: -35px;
+  width: 114px;
+}
+
+.index .x1_-youtube_colored_svg-512-L8Cwlz {
+  background-color: transparent;
+  height: 104px;
+  left: calc(49.74% - 52px);
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 104px;
+}
+
+.index .text-IO3Fu5 {
+  background-color: transparent;
+  height: 496px;
+  left: 525px;
+  position: absolute;
+  top: 212px;
+  width: 871px;
+}
+
+.index .white_xd-6mwpGx {
+  background-color: transparent;
+  height: 304px;
+  object-fit: cover;
+  position: absolute;
+  right: calc(49.58% - 135px);
+  top: -35px;
+  width: 272px;
+}
+
+.index .tips-6mwpGx {
+  background-color: transparent;
+  bottom: 0px;
+  height: 220px;
+  left: 0px;
+  position: absolute;
+  width: 100%;
+}
+
+.index .titre-d8N4LW {
+  background-color: transparent;
+  color: var(--god-ffffff);
+  font-family: var(--font-family-sfui_display-bold);
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  height: 36px;
+  letter-spacing: 0.00px;
+  line-height: 28px;
+  position: absolute;
+  right: calc(49.94% - 39px);
+  text-align: center;
+  top: 3px;
+  white-space: nowrap;
+  width: 78px;
+}
+
+.index .lorem-ipsum-dolor-si-d8N4LW {
+  background-color: transparent;
+  color: #cfcfcf;
+  font-family: var(--font-family-sfui_display-medium);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+  height: 168px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  position: absolute;
+  text-align: center;
+  top: 48px;
+  width: calc(100.00% + 2px);
+}
+
+.index .dots-d8N4LW {
+  background-color: transparent;
+  bottom: calc(29.86% - 3px);
+  height: 9px;
+  left: calc(49.88% - 28px);
+  position: absolute;
+  width: 57px;
+}
+
+.index .ellipse-1-qOji59 {
+  background-color: var(--god-ffffff);
+  border-radius: 4.5px;
+  height: 100%;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 9px;
+}
+
+.index .ellipse-2-qOji59 {
+  background-color: var(--grayed-out-white-ffffff);
+  border-radius: 4.5px;
+  height: 100%;
+  left: calc(50.00% - 4px);
+  position: absolute;
+  top: 0px;
+  width: 9px;
+}
+
+.index .ellipse-3-qOji59 {
+  background-color: var(--grayed-out-white-ffffff);
+  border-radius: 4.5px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 9px;
+}
+
+.index .features-IO3Fu5 {
+  background-color: transparent;
+  height: 79px;
+  left: 100px;
+  position: absolute;
+  top: 1353px;
+  width: 689px;
+}
+
+.index .pourquoi-nous-choisir-2q4aZt {
+  background-color: transparent;
+  color: #f8719f;
+  font-family: var(--font-family-sfui_display-black);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 900;
+  height: 31px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 330px;
+}
+
+.index .vice-point-en-quelques-mots-2q4aZt {
+  background-color: transparent;
+  bottom: -6px;
+  color: #eb5588;
+  font-family: var(--font-family-sfui_display-black);
+  font-size: var(--font-size-xxxxxl);
+  font-style: normal;
+  font-weight: 900;
+  height: 52px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 42px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: calc(100.00% + 2px);
+}
+
+.index .features-posts-IO3Fu5 {
+  background-color: transparent;
+  height: 781px;
+  left: 135px;
+  position: absolute;
+  top: 1448px;
+  width: 1624px;
+}
+
+.index .white_xd-Xo9HmX {
+  background-color: transparent;
+  height: calc(100.00% + 90px);
+  object-fit: cover;
+  position: absolute;
+  right: calc(49.83% - 375px);
+  top: -35px;
+  width: 753px;
+}
+
+.index .feature-2-Xo9HmX {
+  background-color: transparent;
+  height: 550px;
+  left: calc(48.82% - 213px);
+  position: absolute;
+  top: 91px;
+  width: 436px;
+}
+
+.index .background-9fPg0m {
+  background-color: #cae0e2;
+  border: 3px solid;
+  border-color: #a4649429;
+  border-radius: 30px;
+  height: calc(100.00% - 31px);
+  left: 46px;
+  position: absolute;
+  top: 31px;
+  width: calc(100.00% - 46px);
+}
+
+.index .lorem-ipsum-dolor-si-9fPg0m {
+  background-color: transparent;
+  bottom: 54px;
+  height: 245px;
+  left: 76px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  overflow: hidden;
+  position: absolute;
+  text-align: left;
+  width: calc(100.00% - 103px);
+}
+
+.index .header-9fPg0m {
+  background-color: transparent;
+  height: 222px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .sans-titre-2-vQFx15 {
+  background-color: transparent;
+  border-radius: 30px 30px 0px 0px;
+  height: calc(100.00% - 31px);
+  left: 46px;
+  object-fit: cover;
+  position: absolute;
+  top: 31px;
+  width: calc(100.00% - 46px);
+}
+
+.index .text-vQFx15 {
+  background-color: transparent;
+  bottom: calc(37.10% - 36px);
+  height: 98px;
+  position: absolute;
+  right: 12px;
+  width: 171px;
+}
+
+.index .vice-pointfeature-2-E72Qec {
+  background-color: transparent;
+  color: var(--not-really-black-2a2a2a);
+  font-family: var(--font-family-sfui_display-bold);
+  font-size: var(--font-size-xxxxl);
+  font-style: normal;
+  font-weight: 700;
+  height: 74px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 30px;
+  position: absolute;
+  text-align: right;
+  top: 6px;
+  white-space: nowrap;
+  width: calc(100.00% + 2px);
+}
+
+.index .views-E72Qec {
+  background-color: transparent;
+  bottom: 0px;
+  height: 21px;
+  opacity: 0.75;
+  position: absolute;
+  right: 2px;
+  width: 67px;
+}
+
+.index .eye-svgrepo-com-I8eY0G {
+  background-color: transparent;
+  height: 11px;
+  left: 0px;
+  position: absolute;
+  top: calc(50.00% - 6px);
+  width: 19px;
+}
+
+.index .trac-1-Yx1rxm {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .x1006-I8eY0G {
+  background-color: transparent;
+  color: var(--not-really-black-2a2a2a);
+  font-family: var(--font-family-sfui_display-medium);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 500;
+  height: calc(100.00% + 2px);
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  position: absolute;
+  right: -2px;
+  text-align: right;
+  top: -2px;
+  white-space: nowrap;
+  width: 44px;
+}
+
+.index .dbp6s81-e9e8d4d8-685-vQFx15 {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 196px;
+}
+
+.index .more-9fPg0m {
+  background-color: transparent;
+  bottom: 30px;
+  height: 16px;
+  position: absolute;
+  right: 29px;
+  width: 82px;
+}
+
+.index .right-arrow-6405-5HLobe {
+  background-color: transparent;
+  height: 10px;
+  position: absolute;
+  right: 0px;
+  top: calc(47.14% - 5px);
+  width: 5px;
+}
+
+.index .trac-7-rdtkco {
+  background-color: transparent;
+  height: 100%;
+  left: 1px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .lire-la-suite-5HLobe {
+  background-color: transparent;
+  height: 18px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  overflow: hidden;
+  position: absolute;
+  text-align: left;
+  top: -6px;
+  white-space: nowrap;
+  width: calc(100.00% - 10px);
+}
+
+.index .feature-1-Xo9HmX {
+  background-color: transparent;
+  height: 554px;
+  left: 0px;
+  position: absolute;
+  top: 87px;
+  width: 408px;
+}
+
+.index .background-AuOVHu {
+  background-color: #cef9ff;
+  border: 3px solid;
+  border-color: #a4649429;
+  border-radius: 30px;
+  height: calc(100.00% - 35px);
+  left: 18px;
+  position: absolute;
+  top: 35px;
+  width: calc(100.00% - 18px);
+}
+
+.index .lorem-ipsum-dolor-si-AuOVHu {
+  background-color: transparent;
+  bottom: 54px;
+  height: 245px;
+  left: 48px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  overflow: hidden;
+  position: absolute;
+  text-align: left;
+  width: calc(100.00% - 75px);
+}
+
+.index .header-AuOVHu {
+  background-color: transparent;
+  height: 227px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .ch-h-ld-mi-6DsSrE {
+  background-color: transparent;
+  border-radius: 30px 30px 0px 0px;
+  bottom: 1px;
+  height: 191px;
+  left: 18px;
+  object-fit: cover;
+  position: absolute;
+  width: calc(100.00% - 18px);
+}
+
+.index .text-6DsSrE {
+  background-color: transparent;
+  bottom: calc(36.43% - 36px);
+  height: 98px;
+  position: absolute;
+  right: 12px;
+  width: 167px;
+}
+
+.index .vice-pointfeature-1-0sfvUM {
+  background-color: transparent;
+  color: var(--not-really-black-2a2a2a);
+  font-family: var(--font-family-sfui_display-bold);
+  font-size: var(--font-size-xxxxl);
+  font-style: normal;
+  font-weight: 700;
+  height: 74px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 30px;
+  position: absolute;
+  text-align: right;
+  top: 6px;
+  white-space: nowrap;
+  width: calc(100.00% + 2px);
+}
+
+.index .views-0sfvUM {
+  background-color: transparent;
+  bottom: 0px;
+  height: 21px;
+  opacity: 0.75;
+  position: absolute;
+  right: 2px;
+  width: 67px;
+}
+
+.index .eye-svgrepo-com-GRPe8x {
+  background-color: transparent;
+  height: 11px;
+  left: 0px;
+  position: absolute;
+  top: calc(50.00% - 6px);
+  width: 19px;
+}
+
+.index .trac-1-wxFvAX {
+  background-color: transparent;
+  height: 100%;
+  left: 1px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .x1956-GRPe8x {
+  background-color: transparent;
+  color: var(--not-really-black-2a2a2a);
+  font-family: var(--font-family-sfui_display-medium);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 500;
+  height: calc(100.00% + 2px);
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  position: absolute;
+  right: -2px;
+  text-align: right;
+  top: -2px;
+  white-space: nowrap;
+  width: 43px;
+}
+
+.index .dbp6s81-e9e8d4d8-685-6DsSrE {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 174px;
+}
+
+.index .more-AuOVHu {
+  background-color: transparent;
+  bottom: 30px;
+  height: 16px;
+  position: absolute;
+  right: 29px;
+  width: 82px;
+}
+
+.index .right-arrow-6405-ZWQCjU {
+  background-color: transparent;
+  height: 10px;
+  position: absolute;
+  right: 0px;
+  top: calc(47.14% - 5px);
+  width: 5px;
+}
+
+.index .trac-7-pwl29J {
+  background-color: transparent;
+  height: 100%;
+  left: 1px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .lire-la-suite-ZWQCjU {
+  background-color: transparent;
+  height: 18px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  overflow: hidden;
+  position: absolute;
+  text-align: left;
+  top: -6px;
+  white-space: nowrap;
+  width: calc(100.00% - 10px);
+}
+
+.index .feature-3-Xo9HmX {
+  background-color: transparent;
+  height: 548px;
+  position: absolute;
+  right: 0px;
+  top: 93px;
+  width: 426px;
+}
+
+.index .background-bqqPSL {
+  background-color: transparent;
+  height: calc(100.00% - 29px);
+  left: 36px;
+  object-fit: cover;
+  position: absolute;
+  top: 29px;
+  width: calc(100.00% - 36px);
+}
+
+.index .lorem-ipsum-dolor-si-bqqPSL {
+  background-color: transparent;
+  bottom: 54px;
+  height: 245px;
+  left: 66px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  overflow: hidden;
+  position: absolute;
+  text-align: left;
+  width: calc(100.00% - 93px);
+}
+
+.index .header-bqqPSL {
+  background-color: transparent;
+  height: 220px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .sonny-dikKBm {
+  background-color: transparent;
+  border-radius: 30px 30px 0px 0px;
+  height: calc(100.00% - 29px);
+  left: 36px;
+  object-fit: cover;
+  position: absolute;
+  top: 29px;
+  width: calc(100.00% - 36px);
+}
+
+.index .text-dikKBm {
+  background-color: transparent;
+  bottom: calc(37.70% - 37px);
+  height: 98px;
+  position: absolute;
+  right: 12px;
+  width: 171px;
+}
+
+.index .vice-pointfeature-3-DxYzff {
+  background-color: transparent;
+  color: var(--god-ffffff);
+  font-family: var(--font-family-sfui_display-bold);
+  font-size: var(--font-size-xxxxl);
+  font-style: normal;
+  font-weight: 700;
+  height: 74px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 30px;
+  position: absolute;
+  text-align: right;
+  top: 6px;
+  white-space: nowrap;
+  width: calc(100.00% + 2px);
+}
+
+.index .views-DxYzff {
+  background-color: transparent;
+  bottom: 0px;
+  height: 21px;
+  opacity: 0.75;
+  position: absolute;
+  right: 2px;
+  width: 67px;
+}
+
+.index .eye-svgrepo-com-DUwGbn {
+  background-color: transparent;
+  height: 11px;
+  left: 0px;
+  position: absolute;
+  top: calc(50.00% - 6px);
+  width: 19px;
+}
+
+.index .trac-1-X4o9xC {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .x2031-DUwGbn {
+  background-color: transparent;
+  color: var(--god-ffffff);
+  font-family: var(--font-family-sfui_display-medium);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 500;
+  height: calc(100.00% + 2px);
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  position: absolute;
+  right: -2px;
+  text-align: right;
+  top: -2px;
+  white-space: nowrap;
+  width: 43px;
+}
+
+.index .groupe-dfilant-1-dikKBm::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+.index .groupe-dfilant-1-dikKBm {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  mix-blend-mode: normal;
+  overflow: scroll;
+  position: absolute;
+  top: 0px;
+  width: 179px;
+}
+
+.index .png-item_4971013-YAmIJE {
+  background-color: transparent;
+  border-radius: 5px;
+  height: 265px;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 179px;
+}
+
+.index .more-bqqPSL {
+  background-color: transparent;
+  bottom: 30px;
+  height: 16px;
+  position: absolute;
+  right: 29px;
+  width: 82px;
+}
+
+.index .right-arrow-6405-h4JM3z {
+  background-color: transparent;
+  height: 10px;
+  position: absolute;
+  right: 0px;
+  top: calc(47.14% - 5px);
+  width: 5px;
+}
+
+.index .trac-7-SA2zGt {
+  background-color: transparent;
+  height: 100%;
+  left: 1px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .lire-la-suite-h4JM3z {
+  background-color: transparent;
+  height: 18px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  overflow: hidden;
+  position: absolute;
+  text-align: left;
+  top: -6px;
+  white-space: nowrap;
+  width: calc(100.00% - 10px);
+}
+
+.index .blue-IO3Fu5 {
+  background-color: transparent;
+  height: 1198px;
+  left: 0px;
+  position: absolute;
+  top: 2360px;
+  width: 1920px;
+}
+
+.index .background-blue-3DrDoE {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .white-background-2-KsamTk {
+  background-color: #6ccedc;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .ch-h-ld-mi-KsamTk {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .devin-KsamTk {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .banderoles-3DrDoE {
+  background-color: transparent;
+  bottom: calc(39.23% - 206px);
+  height: 525px;
+  left: 135px;
+  position: absolute;
+  width: 1146px;
+}
+
+.index .box-1-KC4pru {
+  background-color: transparent;
+  height: 155px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 866px;
+}
+
+.index .rectangle-4-amxl8k {
+  background-color: var(--god-ffffff);
+  border-radius: 25px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .rectangle-5-amxl8k {
+  background-color: var(--eastern-blue);
+  border-radius: 25px 0px 0px 25px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 137px;
+}
+
+.index .logo-amxl8k {
+  background-color: transparent;
+  bottom: calc(49.46% - 31px);
+  height: 62px;
+  left: 36px;
+  object-fit: cover;
+  position: absolute;
+  width: 65px;
+}
+
+.index .groupe-5-amxl8k {
+  background-color: transparent;
+  bottom: calc(49.32% - 40px);
+  height: 82px;
+  position: absolute;
+  right: 24px;
+  width: 661px;
+}
+
+.index .propuls-par-rage-mp-d2Sutk {
+  background-color: transparent;
+  color: var(--eastern-blue);
+  font-family: var(--font-family-sfui_display-black);
+  font-size: var(--font-size-xxxl);
+  font-style: normal;
+  font-weight: 900;
+  height: 32px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  position: absolute;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 306px;
+}
+
+.index .rage-mp-est-lun-des-d2Sutk {
+  background-color: transparent;
+  bottom: -2px;
+  color: var(--eastern-blue);
+  font-family: var(--font-family-sfui_display-medium);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 500;
+  height: 54px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 22px;
+  position: absolute;
+  text-align: left;
+  width: calc(100.00% + 2px);
+}
+
+.index .more-amxl8k {
+  background-color: transparent;
+  bottom: 14px;
+  height: 21px;
+  position: absolute;
+  right: 33px;
+  width: 141px;
+}
+
+.index .tlcharger-wbuqfK {
+  background-color: transparent;
+  color: var(--eastern-blue);
+  font-family: var(--font-family-sfui_display-semibold);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  height: 23px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  overflow: hidden;
+  position: absolute;
+  text-align: right;
+  top: -2px;
+  white-space: nowrap;
+  width: calc(100.00% - 25px);
+}
+
+.index .download-svgrepo-com-wbuqfK {
+  background-color: transparent;
+  height: 100%;
+  position: absolute;
+  right: 0px;
+  top: 1px;
+  width: 17px;
+}
+
+.index .groupe-6-o4c9qS {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: relative;
+  top: 0px;
+  width: 100%;
+}
+
+.index .trac-8-lmUdui {
+  background-color: transparent;
+  height: 17px;
+  left: 3px;
+  object-fit: cover;
+  position: absolute;
+  top: -1px;
+  width: calc(100.00% - 6px);
+}
+
+.index .trac-9-lmUdui {
+  background-color: transparent;
+  bottom: -1px;
+  height: 2px;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  width: calc(100.00% + 1px);
+}
+
+.index .box-2-KC4pru {
+  background-color: transparent;
+  height: 155px;
+  left: 140px;
+  position: absolute;
+  top: calc(50.00% - 78px);
+  width: calc(100.00% - 280px);
+}
+
+.index .rectangle-4-KZeEEj {
+  background-color: #ff6499;
+  border-radius: 25px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .rectangle-5-KZeEEj {
+  background-color: #f23e7b;
+  border-radius: 25px 0px 0px 25px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 137px;
+}
+
+.index .island-svgrepo-com-KZeEEj {
+  background-color: transparent;
+  height: 62px;
+  left: 37px;
+  position: absolute;
+  top: calc(50.00% - 31px);
+  width: 63px;
+}
+
+.index .trac-13-n2Z06a {
+  background-color: transparent;
+  height: calc(100.00% - 10px);
+  left: 1px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .trac-14-n2Z06a {
+  background-color: transparent;
+  bottom: 0px;
+  height: 7px;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+}
+
+.index .groupe-5-KZeEEj {
+  background-color: transparent;
+  bottom: calc(49.32% - 40px);
+  height: 82px;
+  position: absolute;
+  right: 24px;
+  width: 661px;
+}
+
+.index .bas-sur-vice-city-j3h3LJ {
+  background-color: transparent;
+  color: var(--god-ffffff);
+  font-family: var(--font-family-sfui_display-black);
+  font-size: var(--font-size-xxxl);
+  font-style: normal;
+  font-weight: 900;
+  height: 32px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  position: absolute;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 253px;
+}
+
+.index .rage-mp-est-lun-des-j3h3LJ {
+  background-color: transparent;
+  bottom: -2px;
+  color: var(--god-ffffff);
+  font-family: var(--font-family-sfui_display-medium);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 500;
+  height: 54px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 22px;
+  position: absolute;
+  text-align: left;
+  width: calc(100.00% + 2px);
+}
+
+.index .more-KZeEEj {
+  background-color: transparent;
+  bottom: 14px;
+  height: 21px;
+  position: absolute;
+  right: 34px;
+  width: 218px;
+}
+
+.index .dcouvrir-vice-city-Vw8Slp {
+  background-color: transparent;
+  color: var(--god-ffffff);
+  font-family: var(--font-family-sfui_display-semibold);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  height: 23px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  overflow: hidden;
+  position: absolute;
+  text-align: right;
+  top: -2px;
+  white-space: nowrap;
+  width: calc(100.00% - 24px);
+}
+
+.index .book-svgrepo-com-Vw8Slp {
+  background-color: transparent;
+  height: 100%;
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  width: 14px;
+}
+
+.index .groupe-8-UiG5sR {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: relative;
+  top: 0px;
+  width: 100%;
+}
+
+.index .groupe-7-6lNsRt {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: relative;
+  top: 0px;
+  width: 100%;
+}
+
+.index .trac-10-tBmJxU {
+  background-color: transparent;
+  bottom: 1px;
+  height: 3px;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+}
+
+.index .trac-11-tBmJxU {
+  background-color: transparent;
+  height: 17px;
+  left: 1px;
+  object-fit: cover;
+  position: absolute;
+  top: 1px;
+  width: 2px;
+}
+
+.index .trac-12-tBmJxU {
+  background-color: transparent;
+  height: 17px;
+  object-fit: cover;
+  position: absolute;
+  right: 0px;
+  top: 1px;
+  width: 11px;
+}
+
+.index .box-1-Roaebp {
+  background-color: transparent;
+  bottom: 0px;
+  height: 155px;
+  position: absolute;
+  right: 0px;
+  width: 866px;
+}
+
+.index .rectangle-4-dKrqkB {
+  background-color: var(--god-ffffff);
+  border-radius: 25px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .rectangle-5-dKrqkB {
+  background-color: var(--eastern-blue);
+  border-radius: 25px 0px 0px 25px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 137px;
+}
+
+.index .logo-dKrqkB {
+  background-color: transparent;
+  bottom: calc(49.46% - 31px);
+  height: 62px;
+  left: 36px;
+  object-fit: cover;
+  position: absolute;
+  width: 65px;
+}
+
+.index .groupe-5-dKrqkB {
+  background-color: transparent;
+  bottom: calc(49.32% - 40px);
+  height: 82px;
+  position: absolute;
+  right: 24px;
+  width: 661px;
+}
+
+.index .lultime-exprience-de-roleplay-crit-48N4jR {
+  background-color: transparent;
+  color: var(--eastern-blue);
+  font-family: var(--font-family-sfui_display-black);
+  font-size: var(--font-size-xxxl);
+  font-style: normal;
+  font-weight: 900;
+  height: 32px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  position: absolute;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 521px;
+}
+
+.index .lorem-ipsum-dolor-si-48N4jR {
+  background-color: transparent;
+  bottom: -2px;
+  color: var(--eastern-blue);
+  font-family: var(--font-family-sfui_display-medium);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 500;
+  height: 54px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 22px;
+  position: absolute;
+  text-align: left;
+  width: calc(100.00% + 2px);
+}
+
+.index .more-dKrqkB {
+  background-color: transparent;
+  bottom: 14px;
+  height: 21px;
+  position: absolute;
+  right: 24px;
+  width: 150px;
+}
+
+.index .rejoindre-X4T3hU {
+  background-color: transparent;
+  color: var(--eastern-blue);
+  font-family: var(--font-family-sfui_display-semibold);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  height: 23px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  overflow: hidden;
+  position: absolute;
+  text-align: right;
+  top: -2px;
+  white-space: nowrap;
+  width: calc(100.00% - 34px);
+}
+
+.index .gaming-svgrepo-com-X4T3hU {
+  background-color: transparent;
+  height: calc(100.00% - 2px);
+  object-fit: cover;
+  position: absolute;
+  right: 0px;
+  top: 1px;
+  width: 23px;
+}
+
+.index .features-3DrDoE {
+  background-color: transparent;
+  height: 129px;
+  left: 130px;
+  position: absolute;
+  top: 143px;
+  width: 990px;
+}
+
+.index .titre-SL1PXG {
+  background-color: transparent;
+  color: var(--god-ffffff);
+  font-family: var(--font-family-sfui_display-black);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 900;
+  height: 31px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 70px;
+}
+
+.index .lorem-ipsum-dolor-si-SL1PXG {
+  background-color: transparent;
+  bottom: -10px;
+  color: var(--god-ffffff);
+  font-family: var(--font-family-sfui_display-black);
+  font-size: var(--font-size-xxxxxl);
+  font-style: normal;
+  font-weight: 900;
+  height: 102px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 42px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: calc(100.00% + 2px);
+}
+
+.index .screenshots-IO3Fu5 {
+  background-color: transparent;
+  height: 835px;
+  left: 0px;
+  position: absolute;
+  top: 3724px;
+  width: 1920px;
+}
+
+.index .groupe-de-masques-3-5CVdps {
+  background-color: transparent;
+  bottom: 61px;
+  height: 469px;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  width: 326px;
+}
+
+.index .groupe-de-masques-1-5CVdps {
+  background-color: transparent;
+  bottom: 61px;
+  height: 469px;
+  object-fit: cover;
+  position: absolute;
+  right: 0px;
+  width: 326px;
+}
+
+.index .groupe-de-masques-2-5CVdps {
+  background-color: transparent;
+  bottom: 0px;
+  height: 590px;
+  left: calc(48.32% - 496px);
+  object-fit: cover;
+  position: absolute;
+  width: 1026px;
+}
+
+.index .titre-5CVdps {
+  background-color: transparent;
+  height: 129px;
+  left: 130px;
+  position: absolute;
+  top: 0px;
+  width: 990px;
+}
+
+.index .titre-XWam2e {
+  background-color: transparent;
+  color: #49c4d4;
+  font-family: var(--font-family-sfui_display-black);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 900;
+  height: 31px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 24px;
+  position: absolute;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 70px;
+}
+
+.index .lorem-ipsum-dolor-si-XWam2e {
+  background-color: transparent;
+  bottom: -10px;
+  color: #49c4d4;
+  font-family: var(--font-family-sfui_display-black);
+  font-size: var(--font-size-xxxxxl);
+  font-style: normal;
+  font-weight: 900;
+  height: 102px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 42px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: calc(100.00% + 2px);
+}
+
+.index .footer-IO3Fu5 {
+  background-color: transparent;
+  height: 691px;
+  left: 0px;
+  position: absolute;
+  top: 4702px;
+  width: 1920px;
+}
+
+.index .footer_bg-6isyAT {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .footer_bg-yG03hB {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.index .trac-15-6isyAT {
+  background-color: transparent;
+  bottom: 0px;
+  height: 435px;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  width: 1404px;
+}
+
+.index .white_xd-6isyAT {
+  background-color: transparent;
+  bottom: calc(39.85% - 69px);
+  height: 174px;
+  left: 50px;
+  object-fit: cover;
+  position: absolute;
+  width: 161px;
+}
+
+.index .vice-point-nest-pas-6isyAT {
+  background-color: transparent;
+  bottom: calc(27.80% - 61px);
+  color: var(--god-ffffff);
+  font-family: var(--font-family-sf_ui_display);
+  font-size: var(--font-size-m);
+  font-weight: 500;
+  height: 218px;
+  left: 263px;
+  letter-spacing: 0.00px;
+  line-height: 25px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 351px;
+}
+
+.index .span0-efIrLx {
+  font-family: var(--font-family-sfui_display-bold);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.index .span1-efIrLx {
+  font-family: var(--font-family-sfui_display-medium);
+  font-style: normal;
+}
+
+.index .span2-efIrLx {
+  font-family: var(--font-family-sfui_display-bold);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.index .span3-efIrLx {
+  font-family: var(--font-family-sfui_display-medium);
+  font-style: normal;
+}
+
+.index .socials-6isyAT {
+  background-color: transparent;
+  bottom: 90px;
+  height: 27px;
+  left: 263px;
+  position: absolute;
+  width: 125px;
+}
+
+.index .icon-awesome-twitter-LbzCJn {
+  background-color: transparent;
+  height: calc(100.00% - 5px);
+  left: 1px;
+  object-fit: cover;
+  position: absolute;
+  top: 3px;
+  width: 27px;
+}
+
+.index .icon-awesome-youtube-LbzCJn {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: calc(48.24% - 14px);
+  top: 3px;
+  width: 29px;
+}
+
+.index .icon-awesome-discord-LbzCJn {
+  background-color: transparent;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 24px;
+}
+</style><script id="anime-js-script" src="https://cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js" integrity="sha256-98Q574VkbV+PkxXCKSgL6jVq9mrVbS7uCdA+vt0sLS8=" crossorigin="anonymous"></script><script id="imgloaded-js-script" src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script><style id="action-links-styles">
+@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
+
+#anima-interface{
+  transition: all 0.5s ease-in-out;
+}
+
+#anima-watermark {
+  transition: all 0.5s ease-in-out;
+  display: none;
+}
+#anima-watermark-link{
+  position: fixed;
+  bottom:20px;
+  height:30px;
+  border-radius: 1000px;
+  background: #3B3B3B;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  user-select:none;
+  transition: width 0.25s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+  text-decoration:none;
+  color:#fff;
+  padding:8px 16px 8px 11px;
+  font-family:Mulish, sans-serif;
+  font-size:12px;
+}
+#anima-watermark-link .text {
+  margin-left: 6px;
+}
+
+.omniview-anima-action-links .link{
+  height: 30px;
+  width: 30px;
+  border-radius: 1000px;
+  background: #3B3B3B;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  user-select:none;
+  transition: width 0.25s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+  text-decoration:none;
+  color:#fff;
+}
+.omniview-anima-action-links #comment-link .text,.omniview-anima-action-links #code-link .text{
+  display:none;
+  font-size:12px;
+  margin-right:5px;
+}
+.omniview-anima-action-links #comment-link:hover,.omniview-anima-action-links #code-link:hover{
+  width:105px;
+}
+.omniview-anima-action-links #comment-link.pop-active,.omniview-anima-action-links #code-link.pop-active{
+  width:105px;
+  background: #FF6250;
+}
+.omniview-anima-action-links #comment-link.pop-active .text,.omniview-anima-action-links #code-link.pop-active .text{
+  display:block
+}
+.omniview-anima-action-links #comment-link:hover .text,.omniview-anima-action-links #code-link:hover .text{
+  display:block;
+}
+
+.link.navigation{
+  position:fixed;
+  left:50%;
+  transform:translateX(-50%);
+  width:auto;
+  height:32px;
+  color:#fff;
+  font-size:12px;
+  cursor:default;
+  padding:0 5px;
+}
+.link.navigation .icon{
+  margin:0 6px;
+  fill:none;
+  stroke:currentColor;
+  cursor:pointer;
+}
+.link.navigation .icon.disabled{
+  opacity:0.5;
+  cursor:default;
+}
+
+
+.link.navigation .home-icon{
+  margin-left:6px;
+  fill:currentColor;
+  stroke:currentColor;
+  cursor:pointer;
+}
+
+.omniview-anima-action-links .restart{
+  height: 30px;
+  padding:0 12px;
+  background: #3B3B3B;
+  border-radius: 1000px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  color:#f1f1f1;
+  font-size: 12px;
+}
+
+.omniview-anima-action-links{
+  display:flex;
+  align-items:center;
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  font-family:Mulish, sans-serif;
+  transition: all 0.5s ease-in-out;
+  opacity:1;
+}
+
+.omniview-anima-action-links > * + *{
+   margin-right: 0;
+   margin-left: 10px;
+}
+
+.idle{
+  opacity:0;
+  pointer-events:none;
+}
+
+#popoverOpener {
+  position: absolute;
+  left: 50%;
+  margin-left: -10vw;
+  text-align: center;
+  top: 45vh;
+  width: 20vw;
+}
+
+
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1060;
+  display: none;
+  font-family: "sans-serif";
+  font-size: 14px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.popover.top {
+  margin-top: -12px
+}
+
+.popover.right {
+  margin-left: 10px
+}
+
+.popover.bottom {
+  margin-top: 10px
+}
+
+.popover.left {
+  margin-left: -10px
+}
+
+.popover-title {
+  padding: 8px 14px;
+  margin: 0;
+  font-size: 14px;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ebebeb;
+  border-radius: 5px 5px 0 0
+}
+
+.popover-content {
+  height: 100%;
+  width: 100%;
+  display:flex;
+  overflow:hidden;
+  font-family:Mulish, sans-serif;
+}
+
+
+
+.popover>.arrow,.popover>.arrow:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid
+}
+
+.popover>.arrow {
+  border-width: 11px
+}
+
+.popover>.arrow:after {
+  content: "";
+  border-width: 10px
+}
+
+.popover.top>.arrow {
+  bottom: -11px;
+  left: 50%;
+  margin-left: -11px;
+  border-top-color: #999;
+  border-top-color: rgba(0,0,0,.25);
+  border-bottom-width: 0
+}
+
+.popover.top>.arrow:after {
+  bottom: 1px;
+  margin-left: -10px;
+  content: " ";
+  border-top-color: #fff;
+  border-bottom-width: 0
+}
+
+.popover.right>.arrow {
+  top: 50%;
+  left: -11px;
+  margin-top: -11px;
+  border-right-color: #999;
+  border-right-color: rgba(0,0,0,.25);
+  border-left-width: 0
+}
+
+.popover.right>.arrow:after {
+  bottom: -10px;
+  left: 1px;
+  content: " ";
+  border-right-color: #fff;
+  border-left-width: 0
+}
+
+.popover.bottom>.arrow {
+  top: -11px;
+  left: 50%;
+  margin-left: -11px;
+  border-top-width: 0;
+  border-bottom-color: #999;
+  border-bottom-color: rgba(0,0,0,.25)
+}
+
+.popover.bottom>.arrow:after {
+  top: 1px;
+  margin-left: -10px;
+  content: " ";
+  border-top-width: 0;
+  border-bottom-color: #fff
+}
+
+.popover.left>.arrow {
+  top: 50%;
+  right: -11px;
+  margin-top: -11px;
+  border-right-width: 0;
+  border-left-color: #999;
+  border-left-color: rgba(0,0,0,.25)
+}
+
+.popover.left>.arrow:after {
+  right: 1px;
+  bottom: -10px;
+  content: " ";
+  border-right-width: 0;
+  border-left-color: #fff
+}
+
+
+
+#anima-comment-popover,#anima-code-popover{
+  background:#333333;
+  color:#fff;
+}
+
+#anima-comment-popover.top>.arrow,#anima-comment-popover.top>.arrow:after,#anima-code-popover.top>.arrow:after,#anima-code-popover.top>.arrow {
+  border-top-color:#333;  
+}
+
+#anima-comment-popover .btn,#anima-code-popover .btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 20px;
+  background: #FF6250;
+  color:#fff;
+  border-radius: 100px;
+  width: max-content;
+  text-decoration:none;
+}
+
+@media screen and (max-width: 550px) {
+  #anima-watermark-link {
+    padding: 6px !important;
+  }
+  #anima-watermark-link .text {
+    display: none !important;
+  }
+}
+
+</style></head>
+<body style="margin: 0; background: #ffffff;">
+    <input type="hidden" id="anPageName" name="page" value="index" />
+    <div class="container-center-horizontal">
+        <div class="index screen" data-id="888e0d62-92a3-49fe-8db4-96e5807dbd11">
+            <div class="background-IO3Fu5" data-id="caddb895-2d0e-444d-a087-3d97d2190946">
+                <img
+                    class="image-1-E7bZMV"
+                    data-id="c8a400e6-d06b-4e58-8153-5627b0408dff"
+                    src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/image-1@1x.png"
+                    anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/image-1@1x.png"
+                    alt="Image 1"
+                />
+                <div class="image-2-E7bZMV" data-id="5437dcdc-36b6-4fd8-89d3-975de03cdf23"></div>
+                <div class="image-1-84XpkF" data-id="ca728c4b-d4a0-4910-b791-99738a40ccfd"></div>
+            </div>
+            <div class="navbar-IO3Fu5" data-id="a9f54380-75ce-4d9d-9c53-c212c2ba9078">
+                <div class="commencer-jouer-dROX2W sfuidisplay-bold-white-18px" data-id="c0dc9e1d-ff09-4e47-89cc-9497a7c80455">COMMENCER À JOUER</div>
+                <div class="forum-dROX2W sfuidisplay-bold-white-18px" data-id="19c5273d-da8d-4156-8430-460261fdc874">FORUM</div>
+                <div class="discord-dROX2W sfuidisplay-bold-white-18px" data-id="3f12f843-662e-42ea-8249-f778493a03c4">DISCORD</div>
+                <div class="panel-dROX2W sfuidisplay-bold-white-18px" data-id="e4d9dc7f-a90c-47f3-b690-7d9373c41497">PANEL</div>
+                <img
+                    class="hover-dROX2W"
+                    data-id="63af8e30-fdbf-44d8-a865-8e2bd0ceabbc"
+                    src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/hover@1x.png"
+                    anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/hover@1x.png"
+                    alt="hover"
+                />
+                <div class="accueil-dROX2W sfuidisplay-bold-white-18px" data-id="923f5622-2ae8-435d-b859-37164e95fb82">ACCUEIL</div>
+                <div class="support-technique-dROX2W sfuidisplay-bold-white-18px" data-id="280fe184-ec43-4da9-aeb1-e8fdff2ad503">SUPPORT TECHNIQUE</div>
+            </div>
+            <div class="register-button-IO3Fu5" data-id="0b3092d5-64d8-4a4d-a80f-7781b6e369f7">
+                <div class="rectangle-2-YF7sV2" data-id="5653399a-098a-4c27-a8bb-7c6a10639368"></div>
+                <div class="rejoindre-YF7sV2 sfuidisplay-bold-white-18px" data-id="cd77e5f2-3b3e-4d65-913e-2133baaac598">REJOINDRE</div>
+            </div>
+            <div class="white-background-2-IO3Fu5" data-id="30455341-20d4-411e-abbe-7feafbc01c73"></div>
+            <img
+                class="trac-6-IO3Fu5"
+                data-id="c9866c99-e8a2-4a67-8752-5cf20a2248c5"
+                src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--6@1x.png"
+                anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--6@1x.png"
+                alt="Trac 6"
+            />
+            <img
+                class="trac-4-IO3Fu5"
+                data-id="dc6bb70f-b7b7-400c-8d64-0d54d30a1dd1"
+                src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--4@1x.png"
+                anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--4@1x.png"
+                alt="Trac 4"
+            />
+            <div class="youtube-IO3Fu5" data-id="7d135532-8352-4804-a2e3-b0dadff37bd7">
+                <img
+                    class="banner_nologo-6ZKrpO"
+                    data-id="4b7d0d43-4b77-4c24-8d35-a1173e91dbe3"
+                    src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/banner-nologo@1x.png"
+                    anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/banner-nologo@1x.png"
+                    alt="banner_nologo"
+                />
+                <div class="groupe-4-6ZKrpO" data-id="68bf761f-2645-4cd7-a38d-38ae9af28c8b">
+                    <div class="dcouvrir-vice-point-en-2-minutes-L8Cwlz" data-id="51c2b87f-5a77-4857-b361-784dadf527ea">
+                        <div class="dcouvrir-Xd3z2Q" data-id="59f22fa5-3145-4293-8bb9-30c8e2b20633">Découvrir</div>
+                        <div class="en-2-minutes-Xd3z2Q" data-id="104f9581-8958-4ea3-85b4-77fb3245fb00">en 2 minutes</div>
+                        <img
+                            class="white_xd-Xd3z2Q"
+                            data-id="c65f6fd0-5ee6-49ed-bf82-8ba4ce3938e4"
+                            src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/white-xd@1x.png"
+                            anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/white-xd@1x.png"
+                            alt="white_xd"
+                        />
+                    </div>
+                    <img
+                        class="x1_-youtube_colored_svg-512-L8Cwlz"
+                        data-id="37b4e51b-ba11-4f62-80cb-973dcf6e7964"
+                        src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/1-youtube-colored-svg-512@1x.png"
+                        anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/1-youtube-colored-svg-512@1x.png"
+                        alt="1_Youtube_colored_svg-512"
+                    />
+                </div>
+            </div>
+            <div class="text-IO3Fu5" data-id="21926cfc-70fb-4bc6-8771-a0eca27f2337">
+                <img
+                    class="white_xd-6mwpGx"
+                    data-id="5dfaa0d0-beb2-4175-bbdd-70f35ec325c4"
+                    src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/white-xd-1@1x.png"
+                    anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/white-xd-1@1x.png"
+                    alt="white_xd"
+                />
+                <div class="tips-6mwpGx" data-id="e8f31362-e4f6-4cae-8e5a-69620968826b">
+                    <div class="titre-d8N4LW" data-id="ee7dad20-20ea-4dc7-8834-6f06d26e47e6">TITRE</div>
+                    <p class="lorem-ipsum-dolor-si-d8N4LW" data-id="3f3dbfda-ac51-4245-a204-d5b1727546b1">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vehicula leo sit amet sapien tristique finibus. Curabitur porttitor mauris sed felis euismod, condimentum tempor nisl tempor. Nunc a tortor vitae eros
+                        euismod aliquam. Quisque a est in velit accumsan blandit. Ut molestie sodales quam quis maximus. Integer eu lobortis nibh. Fusce sagittis pharetra dolor ut ultrices. <br />
+                    </p>
+                    <div class="dots-d8N4LW" data-id="89e1cf9a-fbe6-4d95-9ffc-7b5a1a965852">
+                        <div class="ellipse-1-qOji59" data-id="24136a7d-911e-4d36-a7aa-989e8724eb69"></div>
+                        <div class="ellipse-2-qOji59" data-id="e447bcd0-26ee-4bb0-9a78-e96b5d48a75a"></div>
+                        <div class="ellipse-3-qOji59" data-id="d3192dce-5b46-4d02-b60f-a3f22abb5fb9"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="features-IO3Fu5" data-id="a22a8c42-0873-4211-9ed0-75ad13ed186b">
+                <div class="pourquoi-nous-choisir-2q4aZt" data-id="771f7c04-aef8-4839-bd7c-742e2483240e">POURQUOI NOUS CHOISIR ?</div>
+                <h1 class="vice-point-en-quelques-mots-2q4aZt" data-id="ecfa5d50-61d5-4708-b04f-8a1e760827b3">VICE POINT, EN QUELQUES MOTS.</h1>
+            </div>
+            <div class="features-posts-IO3Fu5" data-id="5cf64f9e-d4bd-4de1-946d-dd1fa2bca33e">
+                <img
+                    class="white_xd-Xo9HmX"
+                    data-id="34e9e1d9-119b-414e-96c3-3d8a087459a8"
+                    src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/white-xd-2@1x.png"
+                    anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/white-xd-2@1x.png"
+                    alt="white_xd"
+                />
+                <div class="feature-2-Xo9HmX" data-id="9e578627-7d39-40e8-9d04-c9aa636dd6d9">
+                    <div class="background-9fPg0m" data-id="8de0d061-6b5a-4549-b28f-c4c15d011c91"></div>
+                    <p class="lorem-ipsum-dolor-si-9fPg0m sfuidisplay-medium-shark-14px" data-id="aa14b0c0-156b-46db-bd78-f29c56a5dfa2">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper, velit non sollicitudin ultricies, mauris mi congue diam, eu accumsan justo enim ut ex. Etiam odio eros, dictum a pretium eget, maximus venenatis
+                        metus. Vivamus iaculis auctor leo. Fusce turpis mi, venenatis et leo eget, porttitor vehicula dui. Etiam facilisis tortor sed tempor molestie. Maecenas bibendum, diam posuere ultrices mollis, lorem tortor mollis
+                        tortor, eu porttitor tellus massa sed sapien...<br />
+                        <br />
+                    </p>
+                    <div class="header-9fPg0m" data-id="b950115f-19bd-425e-a2ec-814374071cc9">
+                        <img
+                            class="sans-titre-2-vQFx15"
+                            data-id="cfd894c8-cdcd-409c-878e-72d2aca712e6"
+                            src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/sans-titre-2@1x.png"
+                            anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/sans-titre-2@1x.png"
+                            alt="Sans titre-2"
+                        />
+                        <div class="text-vQFx15" data-id="0504984d-a54c-475d-9d8b-a7a3319a7287">
+                            <div class="vice-pointfeature-2-E72Qec" data-id="a4df72b3-1d26-4d88-a6f4-74e5ffd804c4">
+                                VICE POINT<br />
+                                FEATURE #2
+                            </div>
+                            <div class="views-E72Qec" data-id="e6a19bb0-ecdc-4d2b-ab5e-ac501fea40bc">
+                                <div class="eye-svgrepo-com-I8eY0G" data-id="b49a07c9-113d-4b8c-a849-e729363f4fa2">
+                                    <img
+                                        class="trac-1-Yx1rxm"
+                                        data-id="4af0e048-40a6-46f3-8e0e-3f38fde04e71"
+                                        src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--1-1@1x.png"
+                                        anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--1-1@1x.png"
+                                        alt="Trac 1"
+                                    />
+                                </div>
+                                <div class="x1006-I8eY0G" data-id="c35110fb-11fa-4f48-af3c-3f95bf6af095">1006</div>
+                            </div>
+                        </div>
+                        <img
+                            class="dbp6s81-e9e8d4d8-685-vQFx15"
+                            data-id="4bd9f9e3-1265-4270-97d1-5b67dd99ef97"
+                            src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/dbp6s81-e9e8d4d8-6859-4889-87bc-1393b399d46f@1x.png"
+                            anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/dbp6s81-e9e8d4d8-6859-4889-87bc-1393b399d46f@1x.png"
+                            alt="dbp6s81-e9e8d4d8-6859-4889-87bc-1393b399d46f"
+                        />
+                    </div>
+                    <div class="more-9fPg0m" data-id="334d2ec6-66fe-4cf9-9d2f-fcae44cdbe33">
+                        <div class="right-arrow-6405-5HLobe" data-id="eb0354f2-d14f-40cd-b5a7-7458b0ae341b">
+                            <img
+                                class="trac-7-rdtkco"
+                                data-id="03bf4c56-df64-47ce-9c79-9231f81877fc"
+                                src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--7-1@1x.png"
+                                anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--7-1@1x.png"
+                                alt="Trac 7"
+                            />
+                        </div>
+                        <div class="lire-la-suite-5HLobe sfuidisplay-medium-shark-14px" data-id="b58fa020-202f-4aab-bad6-dc0d19d36956">Lire la suite<br /></div>
+                    </div>
+                </div>
+                <div class="feature-1-Xo9HmX" data-id="53ea0b0b-0e5f-4361-bea0-f4fb207044ca">
+                    <div class="background-AuOVHu" data-id="43ea1431-7c65-44e7-b313-eacb0a97e6e1"></div>
+                    <p class="lorem-ipsum-dolor-si-AuOVHu sfuidisplay-medium-shark-14px" data-id="9b3be361-519d-4ced-9f3d-7503e90fe523">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper, velit non sollicitudin ultricies, mauris mi congue diam, eu accumsan justo enim ut ex. Etiam odio eros, dictum a pretium eget, maximus venenatis
+                        metus. Vivamus iaculis auctor leo. Fusce turpis mi, venenatis et leo eget, porttitor vehicula dui. Etiam facilisis tortor sed tempor molestie. Maecenas bibendum, diam posuere ultrices mollis, lorem tortor mollis
+                        tortor, eu porttitor tellus massa sed sapien...<br />
+                        <br />
+                    </p>
+                    <div class="header-AuOVHu" data-id="3cb45b32-e74a-49a6-8191-7d65372380a2">
+                        <img
+                            class="ch-h-ld-mi-6DsSrE"
+                            data-id="e50135a4-bac7-4772-8049-88ba6d4762ba"
+                            src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/chhldmi@1x.png"
+                            anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/chhldmi@1x.png"
+                            alt="ChHLdMi"
+                        />
+                        <div class="text-6DsSrE" data-id="8cb1c65c-1c31-45fb-9452-4b98fe916a57">
+                            <div class="vice-pointfeature-1-0sfvUM" data-id="610b6f96-b609-4f91-8f22-5cf5efa38cdc">
+                                VICE POINT<br />
+                                FEATURE #1
+                            </div>
+                            <div class="views-0sfvUM" data-id="ec603656-d6dc-434f-8551-dd14360b69e6">
+                                <div class="eye-svgrepo-com-GRPe8x" data-id="5a2eb9ab-03d3-4c48-ab31-ecef5d71b74a">
+                                    <img
+                                        class="trac-1-wxFvAX"
+                                        data-id="9bca5e96-4bae-471a-bdc9-d9149ef464ab"
+                                        src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--1-1@1x.png"
+                                        anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--1-1@1x.png"
+                                        alt="Trac 1"
+                                    />
+                                </div>
+                                <div class="x1956-GRPe8x" data-id="85caead4-ba0a-4673-8c9a-cdb8e92bb81f">1956</div>
+                            </div>
+                        </div>
+                        <img
+                            class="dbp6s81-e9e8d4d8-685-6DsSrE"
+                            data-id="223b3170-17db-4eb2-a25e-c9a4f8477c75"
+                            src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/dbp6s81-e9e8d4d8-6859-4889-87bc-1393b399d46f-1@1x.png"
+                            anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/dbp6s81-e9e8d4d8-6859-4889-87bc-1393b399d46f-1@1x.png"
+                            alt="dbp6s81-e9e8d4d8-6859-4889-87bc-1393b399d46f"
+                        />
+                    </div>
+                    <div class="more-AuOVHu" data-id="f1a1ff39-ca5e-4624-980d-b123b44c4b35">
+                        <div class="right-arrow-6405-ZWQCjU" data-id="41116075-1cf3-4ae5-9ba2-852a41f13c79">
+                            <img
+                                class="trac-7-pwl29J"
+                                data-id="faa0725f-e8db-4e22-ae75-df815f4a65c1"
+                                src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--7-1@1x.png"
+                                anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--7-1@1x.png"
+                                alt="Trac 7"
+                            />
+                        </div>
+                        <div class="lire-la-suite-ZWQCjU sfuidisplay-medium-shark-14px" data-id="aec0c80a-e803-4fdd-bc14-9bf4a8d707a4">Lire la suite<br /></div>
+                    </div>
+                </div>
+                <div class="feature-3-Xo9HmX" data-id="5660dc4c-82e4-4e64-9871-77b3622b1c50">
+                    <img
+                        class="background-bqqPSL"
+                        data-id="0dfd896c-ec74-4bd5-84cc-89511bcabcd7"
+                        src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/background@1x.png"
+                        anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/background@1x.png"
+                        alt="Background"
+                    />
+                    <p class="lorem-ipsum-dolor-si-bqqPSL sfuidisplay-medium-shark-14px" data-id="3656cd3c-b5e1-4a70-9c43-055fe39da12f">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper, velit non sollicitudin ultricies, mauris mi congue diam, eu accumsan justo enim ut ex. Etiam odio eros, dictum a pretium eget, maximus venenatis
+                        metus. Vivamus iaculis auctor leo. Fusce turpis mi, venenatis et leo eget, porttitor vehicula dui. Etiam facilisis tortor sed tempor molestie. Maecenas bibendum, diam posuere ultrices mollis, lorem tortor mollis
+                        tortor, eu porttitor tellus massa sed sapien...<br />
+                        <br />
+                    </p>
+                    <div class="header-bqqPSL" data-id="35323c46-a692-4d52-ba12-e953229b38df">
+                        <img
+                            class="sonny-dikKBm"
+                            data-id="df30cd52-40ae-40e3-a954-0e436be0d4fc"
+                            src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/sonny@1x.png"
+                            anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/sonny@1x.png"
+                            alt="sonny"
+                        />
+                        <div class="text-dikKBm" data-id="3f41efdb-7655-4d59-951b-62184cc6a3e6">
+                            <div class="vice-pointfeature-3-DxYzff" data-id="27bace5c-1e69-4212-9e6c-1ed614072157">
+                                VICE POINT<br />
+                                FEATURE #3
+                            </div>
+                            <div class="views-DxYzff" data-id="4c0c4352-3a46-49bb-a3d0-9dd0ca7501e3">
+                                <div class="eye-svgrepo-com-DUwGbn" data-id="d3a1fda1-55bb-4ae4-8b30-b5a8fbe0d2cc">
+                                    <img
+                                        class="trac-1-X4o9xC"
+                                        data-id="92c257a4-467c-40ff-8841-d282a04954e0"
+                                        src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--1-2@1x.png"
+                                        anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--1-2@1x.png"
+                                        alt="Trac 1"
+                                    />
+                                </div>
+                                <div class="x2031-DUwGbn" data-id="ced91fa0-d1a7-4716-958c-587ac0d05fc1">2031</div>
+                            </div>
+                        </div>
+                        <div class="groupe-dfilant-1-dikKBm" data-id="a07bc158-bb01-4cea-ac31-346e00fa5d06">
+                            <img
+                                class="png-item_4971013-YAmIJE"
+                                data-id="3c3da6c5-4d27-423d-88fe-35121931b6e1"
+                                src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/pngitem-4971013@1x.png"
+                                anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/pngitem-4971013@1x.png"
+                                alt="PngItem_4971013"
+                            />
+                        </div>
+                    </div>
+                    <div class="more-bqqPSL" data-id="560b12b0-420d-4de9-9d6a-1d0fb7c8be89">
+                        <div class="right-arrow-6405-h4JM3z" data-id="a005a713-4a07-47bf-8269-820280627bf2">
+                            <img
+                                class="trac-7-SA2zGt"
+                                data-id="7644685a-1a3e-434f-bd5e-d66d18e6ce22"
+                                src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--7-1@1x.png"
+                                anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--7-1@1x.png"
+                                alt="Trac 7"
+                            />
+                        </div>
+                        <div class="lire-la-suite-h4JM3z sfuidisplay-medium-shark-14px" data-id="6ae8e227-7b69-4583-b374-bd5b6ecb1741">Lire la suite<br /></div>
+                    </div>
+                </div>
+            </div>
+            <div class="blue-IO3Fu5" data-id="72a7e194-e826-4a56-9c7d-1a8ab967150c">
+                <div class="background-blue-3DrDoE" data-id="fcc60f86-9b1d-4897-becb-8f96e3e3e04e">
+                    <div class="white-background-2-KsamTk" data-id="bcac3a83-164a-4f05-828a-3c86d8e6963e"></div>
+                    <img
+                        class="ch-h-ld-mi-KsamTk"
+                        data-id="eca607c6-4cb0-411e-a755-bd60b3f793f6"
+                        src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/chhldmi-1@1x.png"
+                        anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/chhldmi-1@1x.png"
+                        alt="ChHLdMi"
+                    />
+                    <img
+                        class="devin-KsamTk"
+                        data-id="32f4b921-7341-49ff-b7b0-9d3eee804731"
+                        src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/devin@1x.png"
+                        anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/devin@1x.png"
+                        alt="Devin"
+                    />
+                </div>
+                <div class="banderoles-3DrDoE" data-id="89e83fcf-129f-487b-bcb7-c7e9aad8db6c">
+                    <div class="box-1-KC4pru" data-id="8452aab1-4917-43c5-ab12-8faded11f2f3">
+                        <div class="rectangle-4-amxl8k" data-id="a51efe0d-4732-467e-9696-9d8ccfa0d3d5"></div>
+                        <div class="rectangle-5-amxl8k" data-id="8e81bc84-7afb-492c-8340-29ace5fd1b7c"></div>
+                        <img
+                            class="logo-amxl8k"
+                            data-id="1df1b67f-2b04-4810-b026-b51ebf20a62a"
+                            src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/logo@1x.png"
+                            anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/logo@1x.png"
+                            alt="logo"
+                        />
+                        <div class="groupe-5-amxl8k" data-id="6e016915-dd63-4d87-a485-226e0fc0573e">
+                            <div class="propuls-par-rage-mp-d2Sutk" data-id="602e06e8-b190-4f27-9f12-bd7cb6c42171">PROPULSÉ PAR RAGE MP</div>
+                            <p class="rage-mp-est-lun-des-d2Sutk" data-id="8baaff73-3d4c-41aa-9335-66801246601c">Rage MP est l'un des modes multijoueur les plus performants sur GTA V.</p>
+                        </div>
+                        <div class="more-amxl8k" data-id="94034fbc-d28d-433b-9162-0c7a162eccfd">
+                            <div class="tlcharger-wbuqfK" data-id="64398e1a-17e8-4868-96ac-e445259598cc">Télécharger<br /></div>
+                            <div class="download-svgrepo-com-wbuqfK" data-id="8c6f3696-7e8b-4ffc-a48d-f554d279b6a6">
+                                <div class="groupe-6-o4c9qS" data-id="3ee3ba9e-ed9d-4335-81a2-18aa7420a8d1">
+                                    <img
+                                        class="trac-8-lmUdui"
+                                        data-id="8c9fe5f0-6d1e-47e7-9c7c-c32e86dce586"
+                                        src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--8@1x.png"
+                                        anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--8@1x.png"
+                                        alt="Trac 8"
+                                    />
+                                    <img
+                                        class="trac-9-lmUdui"
+                                        data-id="614017ad-58fa-4f41-9a02-604029504063"
+                                        src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--9@1x.png"
+                                        anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--9@1x.png"
+                                        alt="Trac 9"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-2-KC4pru" data-id="a33e50c7-cff5-42b4-83fd-c64fc8571636">
+                        <div class="rectangle-4-KZeEEj" data-id="529a4ec3-6f59-499c-b0bd-7f2eb080101b"></div>
+                        <div class="rectangle-5-KZeEEj" data-id="ff4808b6-920a-46e3-819f-f71e462e67d0"></div>
+                        <div class="island-svgrepo-com-KZeEEj" data-id="bb18bb53-13e4-4bf2-8003-fd25a45167a0">
+                            <img
+                                class="trac-13-n2Z06a"
+                                data-id="cd14885a-9aa2-4de7-afe4-a563e3eece07"
+                                src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--13@1x.png"
+                                anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--13@1x.png"
+                                alt="Trac 13"
+                            />
+                            <img
+                                class="trac-14-n2Z06a"
+                                data-id="cba5c5be-7e7b-4755-860b-2fa46d4bc3d5"
+                                src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--14@1x.png"
+                                anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--14@1x.png"
+                                alt="Trac 14"
+                            />
+                        </div>
+                        <div class="groupe-5-KZeEEj" data-id="3d2fb032-d6e0-40c0-9064-be4cc438ee7b">
+                            <div class="bas-sur-vice-city-j3h3LJ" data-id="f7178279-056a-49cb-a668-c868f1d14b15">BASÉ SUR VICE CITY</div>
+                            <p class="rage-mp-est-lun-des-j3h3LJ" data-id="1c068bb5-b87e-493f-b12f-287282b5a7b1">Rage MP est l'un des modes multijoueur les plus performants sur GTA V.</p>
+                        </div>
+                        <div class="more-KZeEEj" data-id="ced8843c-a5f4-4cf8-b8e3-f56be444b3da">
+                            <div class="dcouvrir-vice-city-Vw8Slp" data-id="54547f0c-e550-4a18-a301-f4a875784222">Découvrir Vice City</div>
+                            <div class="book-svgrepo-com-Vw8Slp" data-id="a84df1ef-fe39-4a20-97be-5eef98e5c4c0">
+                                <div class="groupe-8-UiG5sR" data-id="bbcc3876-ef71-4f3e-bf16-49a1f4253bb8">
+                                    <div class="groupe-7-6lNsRt" data-id="55bc0c10-227e-4aae-ac03-787ec4566eeb">
+                                        <img
+                                            class="trac-10-tBmJxU"
+                                            data-id="6e648dbb-17f8-4f6e-afb9-54e7ecd3c82f"
+                                            src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--10@1x.png"
+                                            anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--10@1x.png"
+                                            alt="Trac 10"
+                                        />
+                                        <img
+                                            class="trac-11-tBmJxU"
+                                            data-id="4e8d5f10-3498-4488-aafa-273bb7d25967"
+                                            src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--11@1x.png"
+                                            anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--11@1x.png"
+                                            alt="Trac 11"
+                                        />
+                                        <img
+                                            class="trac-12-tBmJxU"
+                                            data-id="0548fc92-9609-4bad-9f2a-a16bb6f653bb"
+                                            src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--12@1x.png"
+                                            anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--12@1x.png"
+                                            alt="Trac 12"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-1-Roaebp" data-id="7edc6f17-d0d6-498a-93fa-9a15a3159ca6">
+                        <div class="rectangle-4-dKrqkB" data-id="03dc54cb-440a-49e8-a0f9-99446fdc5222"></div>
+                        <div class="rectangle-5-dKrqkB" data-id="60d4c6e2-ee3e-4ff4-a780-5131beb6258e"></div>
+                        <img
+                            class="logo-dKrqkB"
+                            data-id="b0ac456a-e751-4235-8139-bb5a673cfb01"
+                            src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/logo-1@1x.png"
+                            anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/logo-1@1x.png"
+                            alt="logo"
+                        />
+                        <div class="groupe-5-dKrqkB" data-id="467e0ebf-3f21-4317-b720-7d6b87f74ed5">
+                            <p class="lultime-exprience-de-roleplay-crit-48N4jR" data-id="09b69a6b-8cf0-4e62-a4d7-8e6d94bdb9a8">L'ULTIME EXPÉRIENCE DE ROLEPLAY ÉCRIT</p>
+                            <p class="lorem-ipsum-dolor-si-48N4jR" data-id="3a393c85-4ce4-4e98-ab3a-426f788de2d3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lobortis congue leo commodo euismod.</p>
+                        </div>
+                        <div class="more-dKrqkB" data-id="0d72d7c1-da7d-4f9c-8ead-c8b1bb18dc30">
+                            <div class="rejoindre-X4T3hU" data-id="7521dd21-b3f8-44d8-abbf-9fcc0b403aa1">Rejoindre<br /></div>
+                            <img
+                                class="gaming-svgrepo-com-X4T3hU"
+                                data-id="747dde75-86ad-4c77-9be1-7aecd663ca76"
+                                src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/gaming-svgrepo-com@1x.png"
+                                anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/gaming-svgrepo-com@1x.png"
+                                alt="gaming-svgrepo-com"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="features-3DrDoE" data-id="fed1edae-ab3f-489b-85a8-24c5405ebfdb">
+                    <div class="titre-SL1PXG" data-id="13ee3c34-5fc1-440b-9fae-8babe499634d">TITRE</div>
+                    <p class="lorem-ipsum-dolor-si-SL1PXG" data-id="9b1de3ae-7fd7-4dfc-afe2-6a8ffff7dc84">
+                        LOREM IPSUM DOLOR SIT AMET CONSECTETUR, <br />
+                        ADIPISCING ELIT.
+                    </p>
+                </div>
+            </div>
+            <div class="screenshots-IO3Fu5" data-id="e9751852-4b0e-4a3a-98e2-df395c10facb">
+                <img
+                    class="groupe-de-masques-3-5CVdps"
+                    data-id="b885a2ae-616e-4b5a-a299-0d2c6ec61cf6"
+                    src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/groupe-de-masques-3@1x.png"
+                    anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/groupe-de-masques-3@1x.png"
+                    alt="Groupe de masques 3"
+                />
+                <img
+                    class="groupe-de-masques-1-5CVdps"
+                    data-id="b6e5c180-f9cf-4f46-899c-f3741a78de1b"
+                    src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/groupe-de-masques-1@1x.png"
+                    anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/groupe-de-masques-1@1x.png"
+                    alt="Groupe de masques 1"
+                />
+                <img
+                    class="groupe-de-masques-2-5CVdps"
+                    data-id="983ac35b-0e24-4425-9c29-ad4ea40ec130"
+                    src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/groupe-de-masques-2@1x.png"
+                    anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/groupe-de-masques-2@1x.png"
+                    alt="Groupe de masques 2"
+                />
+                <div class="titre-5CVdps" data-id="56ca2ddd-b12c-45d7-8a49-963337958a98">
+                    <div class="titre-XWam2e" data-id="18320117-f10d-4022-941d-0f5c706aabff">TITRE</div>
+                    <p class="lorem-ipsum-dolor-si-XWam2e" data-id="3be2fd59-b45d-4d95-be4b-e16ebec9a754">
+                        LOREM IPSUM DOLOR SIT AMET CONSECTETUR, <br />
+                        ADIPISCING ELIT.
+                    </p>
+                </div>
+            </div>
+            <div class="footer-IO3Fu5" data-id="96514c02-4fe8-422d-a302-105fd8d15203">
+                <img
+                    class="footer_bg-6isyAT"
+                    data-id="1fa0b891-e4c6-413c-90a3-5ac1a70f56ce"
+                    src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/footer-bg-1@1x.png"
+                    anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/footer-bg-1@1x.png"
+                    alt="footer_bg"
+                />
+                <img
+                    class="footer_bg-yG03hB"
+                    data-id="0e56e69a-5c5a-49d5-8eb7-9d8349d572f1"
+                    src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/footer-bg-1@1x.png"
+                    anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/footer-bg-1@1x.png"
+                    alt="footer_bg"
+                />
+                <img
+                    class="trac-15-6isyAT"
+                    data-id="302ca0f6-3cc3-48f5-b8fa-7a91bd31f4a4"
+                    src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--15@1x.png"
+                    anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/trac--15@1x.png"
+                    alt="Trac 15"
+                />
+                <img
+                    class="white_xd-6isyAT"
+                    data-id="4a4980b4-3730-4fa5-abd6-f1c4e1f204fc"
+                    src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/white-xd-3@1x.png"
+                    anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/white-xd-3@1x.png"
+                    alt="white_xd"
+                />
+                <p class="vice-point-nest-pas-6isyAT" data-id="8fcc5c5f-674e-477d-89db-f0c98f90e572">
+                    <span class="span0-efIrLx">Vice Point </span>
+                    <span class="span1-efIrLx">
+                        n'est pas affilié à Rockstar North, Take-Two <br />
+                        Interactive ou à d'autres détenteurs de droits. Toutes les <br />
+                        marques commerciales utilisées appartiennent à leurs <br />
+                        propriétaires respectifs.<br />
+                        <br />
+                        Pour toutes questions : <br />
+                    </span>
+                    <span class="span2-efIrLx">
+                        support@vicepoint.me<br />
+                        <br />
+                    </span>
+                    <span class="span3-efIrLx">Où nous trouver :</span>
+                </p>
+                <div class="socials-6isyAT" data-id="06890501-c1a1-4a37-9d0a-b297c91bb32f">
+                    <img
+                        class="icon-awesome-twitter-LbzCJn"
+                        data-id="882a1850-f538-4083-897b-572bef70faa7"
+                        src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/icon-awesome-twitter@1x.png"
+                        anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/icon-awesome-twitter@1x.png"
+                        alt="Icon awesome-twitter"
+                    />
+                    <img
+                        class="icon-awesome-youtube-LbzCJn"
+                        data-id="19e514b8-f7a4-4631-aa44-08a6523c4c75"
+                        src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/icon-awesome-youtube@1x.png"
+                        anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/icon-awesome-youtube@1x.png"
+                        alt="Icon awesome-youtube"
+                    />
+                    <img
+                        class="icon-awesome-discord-LbzCJn"
+                        data-id="31362b17-2108-4865-8677-fc03bc7d8422"
+                        src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/icon-awesome-discord@1x.png"
+                        anima-src="https://cdn.animaapp.com/projects/6377774db14b2366612e4e07/releases/6377779df36f9f0f4296f7d9/img/icon-awesome-discord@1x.png"
+                        alt="Icon awesome-discord"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---->
+</body>
+
+
+</html>
